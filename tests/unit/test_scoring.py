@@ -59,7 +59,7 @@ def test_scoring_get_score_can_using_cache():
     store_mock.cache_set = Mock(return_value=None)
     scoring_kwargs = {"store": store_mock, "email": "stupnikov@otus.ru", "gender": 1}
 
-    score = get_score(**(scoring_kwargs | key_kwargs))
+    score = get_score(**(scoring_kwargs | key_kwargs))  # type: ignore
     assert score is not None
 
     # Check for store cache_get (returns None value) and cache_set was called as expected
@@ -72,7 +72,7 @@ def test_scoring_get_score_can_using_cache():
     # Check for store cache_get was called and get_score returns cached value.
     # cache_set should not be called in this case
 
-    score = get_score(**(scoring_kwargs | key_kwargs))
+    score = get_score(**(scoring_kwargs | key_kwargs))  # type: ignore
     assert math.isclose(score, expected_cached_value)
 
     store_mock.cache_get.assert_called_once_with(key)
@@ -87,7 +87,7 @@ def test_scoring_get_score_can_using_cache():
         ("Re rise error", ConnectionError("Test will pass!"), None),
     ],
 )
-def test_scoring_get_score_can_using_cache(case, side_effect: Any, expected):
+def test_scoring_get_interests(case, side_effect: Any, expected):
     store_mock = Mock(spec=Store)
     store_mock.get = Mock(side_effect=[side_effect])
     if isinstance(side_effect, Exception):
