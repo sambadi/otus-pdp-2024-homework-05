@@ -1,0 +1,14 @@
+services:
+  homework-05:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      REDIS_STORE_HOST: redis
+      REDIS_STORE_PORT: 6379
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
