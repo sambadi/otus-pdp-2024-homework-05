@@ -11,6 +11,8 @@ jobs:
           python-version: '3.12'
       - uses: astral-sh/ruff-action@v1
       - uses: jpetrucciani/mypy-check@master
+        with:
+          requirements: 'types-redis==4.6.0.20241004'
       - name: install poetry
         uses: abatilo/actions-poetry@v2.0.0
         with:
